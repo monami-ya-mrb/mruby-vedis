@@ -255,21 +255,8 @@ typedef int (*ProcConsumer)(const void *, unsigned int, void *);
 typedef struct SyMutexMethods SyMutexMethods;
 typedef struct SyMemMethods SyMemMethods;
 typedef struct SyString SyString;
-typedef struct syiovec syiovec;
 typedef struct SyMutex SyMutex;
 typedef struct Sytm Sytm;
-/* Scatter and gather array. */
-struct syiovec
-{
-#if defined (__WINNT__)
-	/* Same fields type and offset as WSABUF structure defined one winsock2 header */
-	unsigned long nLen;
-	char *pBase;
-#else
-	void *pBase;
-	unsigned long nLen;
-#endif
-};
 struct SyString
 {
 	const char *zString;  /* Raw string (may not be null terminated) */
@@ -7274,7 +7261,6 @@ VEDIS_PRIVATE const vedis_vfs * vedisExportBuiltinVfs(void)
 */
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <sys/uio.h>
 #include <sys/file.h>
 #include <sys/mman.h>
 #include <fcntl.h>
