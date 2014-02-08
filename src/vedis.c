@@ -8966,6 +8966,7 @@ static int unixFullPathname(
   }
   return VEDIS_OK;
 }
+#if !defined(VEDIS_DISABLE_MMAP)
 /* int (*xMmap)(const char *, void **, vedis_int64 *) */
 static int UnixMmap(const char *zPath, void **ppMap, vedis_int64 *pSize)
 {
@@ -8998,6 +8999,7 @@ static void UnixUnmap(void *pView, vedis_int64 nSize)
 {
 	munmap(pView, (size_t)nSize);
 }
+#endif
 /*
  * Export the Unix Vfs.
  */
@@ -9016,8 +9018,13 @@ VEDIS_PRIVATE const vedis_vfs * vedisExportBuiltinVfs(void)
 		unixSleep,           /* xSleep */
 		unixCurrentTime,     /* xCurrentTime */
 		0,                   /* xGetLastError */
+#if !defined(VEDIS_DISABLE_MMAP)
 		UnixMmap,            /* xMmap */
 		UnixUnmap            /* xUnmap */
+#else
+		0,		     /* xMmap */
+		0		     /* xUnmap */
+#endif
 	};
 	return &sUnixvfs;
 }
