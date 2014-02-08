@@ -20216,7 +20216,7 @@ static int vedis_cmd_date(vedis_context *pCtx, int nArg, vedis_value **apArg)
 	vedis_result_string_format(pCtx, "%04d-%02d-%02d", sTm.tm_year, sTm.tm_mon+1, sTm.tm_mday);
 	return VEDIS_OK;
 }
-#if defined(__UNIXES__)
+#if defined(__UNIXES__) && !defined(VEDIS_DISABLE_UTSNAME)
 #include <sys/utsname.h>
 #endif
 /*
@@ -20257,7 +20257,7 @@ static int vedis_cmd_os(vedis_context *pCtx, int nArg, vedis_value **apArg)
 			zName, 
 			sVer.dwMajorVersion, sVer.dwMinorVersion, sVer.dwBuildNumber
 			);
-#elif defined(__UNIXES__)
+#elif defined(__UNIXES__) && !defined(VEDIS_DISABLE_UTSNAME)
 	struct utsname sInfo;
 	if( uname(&sInfo) != 0 ){
 		vedis_result_string(pCtx, "Unix", (int)sizeof("Unix")-1);
