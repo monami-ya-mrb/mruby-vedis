@@ -94,3 +94,15 @@ Vedis: passed time 0.06595 sec
 ## License
 under the Sleepycat License:
 - see LICENSE file
+
+## Trouble shoots.
+
+### Can't compile on my newlib environment
+
+Try to modify your build_config.rb like this:
+
+```ruby
+  conf.gem :github => 'monami-ya.mrb/mruby-vedis' do |g|
+    g.cc.defines << %w(VEDIS_DISABLE_MMAP VEDIS_DISABLE_UTSNAME)
+  end
+```
