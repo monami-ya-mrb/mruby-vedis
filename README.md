@@ -1,4 +1,6 @@
-# mruby-vedis   [![Build Status](https://travis-ci.org/matsumoto-r/mruby-vedis.png?branch=master)](https://travis-ci.org/matsumoto-r/mruby-vedis)
+NOTE: This repository is a forked version. The original version is on https://github.com/matsumoto-r/mruby-vedis.git
+
+# mruby-vedis   [![Build Status](https://travis-ci.org/monami-ya-mrb/mruby-vedis.png?branch=master)](https://travis-ci.org/monami-ya-mrb/mruby-vedis)
 vedis binding by mruby.
 vedis is an embeddable datastore C library built with over 70 commands similar in concept to Redis but without the networking layer since Vedis run in the same process of the host application.
 Please see [vedis pages](http://vedis.symisc.net/index.html).
@@ -10,7 +12,7 @@ MRuby::Build.new do |conf|
 
     # ... (snip) ...
 
-    conf.gem :git => 'https://github.com/matsumoto-r/mruby-vedis.git'
+    conf.gem :git => 'https://github.com/monami-ya-mrb/mruby-vedis.git'
 end
 ```
 ## example 
