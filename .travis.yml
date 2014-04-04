@@ -1,25 +1,8 @@
-language: c
-compiler:
-  - gcc
-before_install:
-    - sudo apt-get -qq update
-install:
-    - sudo apt-get -qq install rake bison git gperf
-before_script:
-  - cd ../
-  - git clone https://github.com/mruby/mruby.git
-  - cd mruby
-  - cp -fp ../mruby-vedis/build_config.rb .
-script: 
-  - rake test
-notifications:
-  irc:
-    channels:
-      - "irc.freenode.org#backdoor-log"
-    on_success: always
-    on_failure: always
-    use_notice: true
-    skip_join: true
-    template:
-        - "[%{message}] %{repository} (%{commit}) by %{author}: See %{build_url}"
+env:
+  matrix:
+  - MRUBY_REPO=https://github.com/mruby/mruby.git MRUBY_BRANCH=master
+  - MRUBY_REPO=https://bitbucket.org/monami_ya_mrb/monami-ya.mrb.git MRUBY_BRANCH=master
+  - MRUBY_REPO=https://bitbucket.org/monami_ya_mrb/monami-ya.mrb.git MRUBY_BRANCH=develop
 
+script:
+  - "ruby run_test.rb all test"
