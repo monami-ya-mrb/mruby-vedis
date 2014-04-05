@@ -22,6 +22,7 @@ end
 MRuby::Build.new do |conf|
   toolchain :gcc
 
-  conf.gem :git => 'https://github.com/monami-ya-mrb/mruby-vedis.git'
   conf.gembox 'default'
+
+  conf.gem File.expand_path(File.dirname(__FILE__))
 end
